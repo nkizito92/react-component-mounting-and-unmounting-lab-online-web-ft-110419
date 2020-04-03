@@ -11,9 +11,13 @@ class Pancake extends React.Component {
   }
 
   // TODO: create a componentDidMount() which will start the interval to count how long the pancake has been cooking
-
+  componentDidMount() {
+    this.startInterval()
+  }
   // TODO: create a componentWillUnmount() which will clear the interval
-
+  componentWillUnmount() {
+    clearInterval(this.interval)
+  }
   updateCounter = () => {
     this.setState({
       timeCooked: this.state.timeCooked + 1
@@ -56,6 +60,8 @@ class Pancake extends React.Component {
     this.props.takeItOff(id, status);
   };
 
+
+
   render() {
     const { timeCooked, flippedAt } = this.state;
     const firstSide = Boolean(this.state.flippedAt === null && typeof flippedAt !== "number");
@@ -73,8 +79,8 @@ class Pancake extends React.Component {
             {firstSide ? (
               <button onClick={this.flip}>Flip me!</button>
             ) : (
-              <button onClick={this.takeItOff}>Take me off!</button>
-            )}
+                <button onClick={this.takeItOff}>Take me off!</button>
+              )}
           </div>
         </div>
       </div>
